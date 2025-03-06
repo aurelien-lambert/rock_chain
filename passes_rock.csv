@@ -1,0 +1,37 @@
+#;Name;Start;End
+1;Traversée tour interieur;GD;GD
+2;Traversée tour interieur (variante 2M);GD;GDGD
+3;Traversée tour extérieur;GD;GD
+4;Bise;GDGD;DD
+5;3 Tapes et tour;GD;GD
+6;3 Tapes et genou au sol;GD;GD
+7;Double tour changement de main;GD;DD
+8;Penché latéral;GD;GD
+9;Penché latéral (variante TTI);DD;GD
+11;Coiffé cavalier;DD;GD
+12;Coiffé cavalière;DD;GD
+13;Enroulé changement de main;GD;DD
+14;Balade;DD;DD
+15;Espagnole Classique;GDGD;GD
+16;Espagnole Tourniquet;GDGD;DD
+17;Espagnole Perpétuelle;GDGD;GD
+18;Chacha;DD;GD
+19;First Move;GD;GD
+20;Spaghetti;GD;GD
+21;Satellite;DD;GDGD
+22;Duck;GD;GD
+23;Penché inversé;GD;GD
+24;Free Spin;GD;GD
+25;Enchufla;GD;GD
+28;Titanic;GDGD;DD
+29;Espagnole Statique;GDGD;GD
+30;Traversée tour interieur (variante MD);DG;GD
+31;Double tour changement de main dans le dos;DD;GD
+32;Toupie;GD;DD
+33;Toupie (version au sol);GD;DD
+34;Duck (Triceps);GD;DD
+35;Duck (Épaule opposée);GD;DD
+36;Tuck;GD;GD
+37;Homme de Vitruve;DD;DD
+38;Homme de Vitruve (v2);DD;DD
+39;Balade Latérale;GD;GD
