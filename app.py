@@ -70,7 +70,7 @@ def search_chain(chain, nb_passes, graph, infinite_loop, initial_start):
     return None
 
 def main():
-    st.title("Pass Chain Builder")
+    st.title("Générateur d'enchainements")
 
     # Open the CSV file from the local folder
     csv_file = "passes_rock.csv"
@@ -90,25 +90,24 @@ def main():
 
     # List available passes starting with 'GD'
     available_passes = graph[initial_start]
-    pass_options = [f"{i}: {p['Name']}" for i, p in enumerate(available_passes)]
-    st.write("Available passes starting with 'GD':")
-    selected_index = st.selectbox("Select the index of the first pass", 
+    pass_options = [f"{p['Name']}" for i, p in enumerate(available_passes)]
+
+    selected_index = st.selectbox("Passe de départ:", 
                                   range(len(available_passes)),
                                   format_func=lambda i: pass_options[i])
     first_pass = available_passes[selected_index]
 
     # Let the user set the number of passes and whether they want an infinite loop
-    nb_passes = st.number_input("Enter the number of passes in the chain:", min_value=1, value=3, step=1)
-    infinite_loop = st.checkbox("Infinite loop (start equals end)?")
+    nb_passes = st.number_input("Nombre de passes de l'enchainement:", min_value=1, value=3, step=1)
+    infinite_loop = st.checkbox("Boucle infinie ?") 
 
-    if st.button("Build Chain"):
+    if st.button("Générer l'enchainement"):
         found_chain = search_chain([first_pass], nb_passes, graph, infinite_loop, initial_start)
         if found_chain is None:
             st.error("No chain matching the criteria was found.")
         else:
-            st.success("Chain found:")
             for i, p in enumerate(found_chain, start=1):
-                st.write(f"Pass {i}: Name = {p['Name']}, Start = {p['Start']}, End = {p['End']}")
+                st.write(f"Passe {i}: {p['Name']}")
 
 if __name__ == '__main__':
     main()
