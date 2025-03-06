@@ -71,42 +71,44 @@ def search_chain(chain, nb_passes, graph, infinite_loop, initial_start):
 
 def main():
     st.title("Pass Chain Builder")
+
+    # Open the CSV file from the local folder
+    csv_file = "passes_rock.csv"
+    try:
+        df = read_passes(csv_file)
+    except Exception as e:
+        st.error(f"Error reading CSV file '{csv_file}': {e}")
+        return
+
+    graph = build_graph(df)
     
-    st.write("Upload your CSV file containing the passes data.")
-    uploaded_file = st.file_uploader("Choose a CSV file", type=["csv"])
-    
-    if uploaded_file is not None:
-        # Read and process the file
-        df = read_passes(uploaded_file)
-        graph = build_graph(df)
-        
-        # The chain must start with 'GD'
-        initial_start = 'GD'
-        if initial_start not in graph:
-            st.error(f"No pass starts with {initial_start}.")
-            return
+    # The chain must start with 'GD'
+    initial_start = 'GD'
+    if initial_start not in graph:
+        st.error(f"No pass starts with {initial_start}.")
+        return
 
-        # List available passes starting with 'GD'
-        available_passes = graph[initial_start]
-        pass_options = [f"{i}: {p['Name']}" for i, p in enumerate(available_passes)]
-        st.write("Available passes starting with 'GD':")
-        selected_index = st.selectbox("Select the index of the first pass", 
-                                      range(len(available_passes)),
-                                      format_func=lambda i: pass_options[i])
-        first_pass = available_passes[selected_index]
+    # List available passes starting with 'GD'
+    available_passes = graph[initial_start]
+    pass_options = [f"{i}: {p['Name']}" for i, p in enumerate(available_passes)]
+    st.write("Available passes starting with 'GD':")
+    selected_index = st.selectbox("Select the index of the first pass", 
+                                  range(len(available_passes)),
+                                  format_func=lambda i: pass_options[i])
+    first_pass = available_passes[selected_index]
 
-        # Let the user set the number of passes and whether they want an infinite loop
-        nb_passes = st.number_input("Enter the number of passes in the chain:", min_value=1, value=3, step=1)
-        infinite_loop = st.checkbox("Infinite loop (start equals end)?")
+    # Let the user set the number of passes and whether they want an infinite loop
+    nb_passes = st.number_input("Enter the number of passes in the chain:", min_value=1, value=3, step=1)
+    infinite_loop = st.checkbox("Infinite loop (start equals end)?")
 
-        if st.button("Build Chain"):
-            found_chain = search_chain([first_pass], nb_passes, graph, infinite_loop, initial_start)
-            if found_chain is None:
-                st.error("No chain matching the criteria was found.")
-            else:
-                st.success("Chain found:")
-                for i, p in enumerate(found_chain, start=1):
-                    st.write(f"Pass {i}: Name = {p['Name']}, Start = {p['Start']}, End = {p['End']}")
+    if st.button("Build Chain"):
+        found_chain = search_chain([first_pass], nb_passes, graph, infinite_loop, initial_start)
+        if found_chain is None:
+            st.error("No chain matching the criteria was found.")
+        else:
+            st.success("Chain found:")
+            for i, p in enumerate(found_chain, start=1):
+                st.write(f"Pass {i}: Name = {p['Name']}, Start = {p['Start']}, End = {p['End']}")
 
 if __name__ == '__main__':
     main()
